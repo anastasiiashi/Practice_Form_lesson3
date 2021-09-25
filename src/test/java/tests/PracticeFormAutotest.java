@@ -3,9 +3,7 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -29,36 +27,29 @@ public class PracticeFormAutotest {
         String currentAddress = "25 Olson street";
         String state = "Haryana";
         String city = "Karnal";
-
         //open the website
         open("https://demoqa.com/automation-practice-form");
-
         //fill in the data
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(email);
         $("[for=gender-radio-2]").click();
         $("#userNumber").setValue(mobile);
-
         //set the date of birth
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("August");
         $(".react-datepicker__year-select").selectOption("1991");
         $(".react-datepicker__day.react-datepicker__day--013").click();
-
         //continue to fill in the form with test data
         $("#subjectsInput").setValue(subject).pressEnter();
         $("[for=\"hobbies-checkbox-2\"]").click();
-
         //upload the picture
         $("#uploadPicture").uploadFile(new File("src/test/resources/not_pass.jpg"));
-
         //end filling the form and press Submit button
         $("#currentAddress").setValue(currentAddress);
         $("#react-select-3-input").setValue(state).pressEnter();
         $("#react-select-4-input").setValue(city).pressEnter();
         $("#submit").scrollTo().click();
-
         //check if the filled in data is correct
         $(".table-responsive").shouldHave(
                 text("Student Name"), text(firstName + " " + lastName),
